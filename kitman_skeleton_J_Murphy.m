@@ -6,6 +6,10 @@
 % NOTE all angles are in radians (rad)
 % x = w, y = h, z = d
 
+% importing csv data and initilzing it to skeleton array
+dataFile = 'skeleton.csv';
+skeleton = csvread(dataFile, 1, 0); % loading 2nd row of dataset
+
 Joints = 25; % No of joint locations
 Samples = 4; % No of samples per joint location
 
@@ -24,9 +28,7 @@ arraySize = (0.75*(size(skeleton)-1));
 RotatedSkeleton = zeros(arraySize);
 
 % calculating angle between hips and front of kinect
-angle = atan((leftHipZ-RightHipZ)/(leftHipX-RightHipX));
-% adding 90 degrees (1.5708 rad) to angle to make it perpendicular
-phi = angle + 1.5708; 
+phi = atan((leftHipZ-RightHipZ)/(leftHipX-RightHipX));
 
 % Rotational Matrix Y-axis %         
 RY = [cos(phi) 0  sin(phi); ...
